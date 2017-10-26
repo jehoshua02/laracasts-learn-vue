@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.js"></script>
+
+  <div id="root">
+    <h1 v-text="new Date()"></h1>
+    <h1>{{ message }}</h1>
+    <h1>{{ message.split('').reverse().join('') }}</h1>
+    <h1>{{ reversedMessage }}</h1>
+
+    <h1>All Tasks</h1>
+    <ul>
+      <li v-for="task in tasks" v-text="task.description"></li>
+    </ul>
+
+    <h1>Completed Tasks</h1>
+    <ul>
+      <li v-for="task in tasks" v-if="task.completed" v-text="task.description"></li>
+    </ul>
+
+    <h1>Incomplete Tasks</h1>
+    <ul>
+      <li v-for="task in incompleteTasks" v-text="task.description"></li>
+    </ul>
+  </div>
+
+
+<script>
+let app = new Vue({
+  el: '#root',
+  data: {
+    message: 'Hello World',
+    tasks: [
+      { description: 'Eat banana', completed: true },
+      { description: 'Eat another banana', completed: false },
+      { description: 'Buy more bananas', completed: false },
+      { description: 'Peel banana', completed: false },
+      { description: 'Throw away banana peel', completed: false },
+      { description: 'Share banana', completed: true },
+    ]
+  },
+  computed: {
+    reversedMessage() {
+      return this.message.split('').reverse().join('');
+    },
+    incompleteTasks() {
+      return this.tasks.filter(task => !task.completed);
+    }
+  }
+});
+</script>
+
+</body>
+</html>
